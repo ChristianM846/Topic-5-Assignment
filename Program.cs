@@ -13,14 +13,31 @@ namespace Topic_5_Assignment
 
             // Part 1
             Console.WriteLine("Hello, I am a random number generator. Please input the minimum value you want:");
-            min = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Okay, now input you maximum desired value:");
-            max = Convert.ToInt32(Console.ReadLine());
-            while (min > max)
+            if (Int32.TryParse(Console.ReadLine(), out min))
             {
-                Console.WriteLine("Silly you! The max value must be higher then the min. Try again");
-                max = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Okay, now input you maximum desired value:");
             }
+            else
+            {
+                Console.WriteLine("That's not a valid number. So I'll be setting the min value as 0");
+                min = 0;
+                Console.WriteLine("Now please input your desired maximum value");
+            }
+
+           if (Int32.TryParse(Console.ReadLine(),out max))
+           {
+                if (min > max)
+                {
+                    Console.WriteLine("Silly you! The max value must be higher then the min, so I'll make it 100 higher than the min");
+                    max = min + 100;
+                }
+           }
+           else
+           {
+                Console.WriteLine("Sorry, you have to enter a valid whole number. I'll be setting the maximum to 100 higher then the minimum");
+                max = min + 100;
+           }
+           
             number1 = generator.Next(min, max + 1);
             Console.WriteLine($"Your randomly generated number between {min} and {max} is {number1}. Have a good day.");
             Console.WriteLine();
